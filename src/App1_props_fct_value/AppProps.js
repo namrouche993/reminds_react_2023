@@ -1,10 +1,12 @@
 
-import { useState } from 'react';
+import React, { useEffect, useState,useRef } from 'react'
 import AddtextComponent from './AddtextComponent';
 import './App.css';
 import Listitems from './Listitems';
 
 function App() {
+  const textref01 = useRef(null);
+
   const [normalvalue,setNormalvalue] = useState(0)
   const countingfct = () => {
     setNormalvalue(normalvalue+2)
@@ -17,14 +19,19 @@ function App() {
     setListofitems([...listofitems,input])
   }
 
+  const focusfct = () => {
+    textref01.current.focus()
+  }
+
   return (
     <div className="App">
       <br></br>
-      <AddtextComponent sendinput={changelist}/>
+      <AddtextComponent sendinput={changelist} textref0={textref01}/>
       <br></br>
       <br></br>
       <Listitems lists={listofitems}/>
       <br></br>
+      <button onClick={focusfct}>focus in parent</button>
       <br></br>
       <br></br>
       <br></br>
