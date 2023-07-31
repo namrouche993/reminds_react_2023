@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import AddtextComponent from './AddtextComponent';
 import './App.css';
@@ -11,6 +12,7 @@ function App() {
   const [listofitems,setListofitems]=useState([])
 
 
+  
   const changelist = (input) =>{
     setListofitems([...listofitems,input])
   }

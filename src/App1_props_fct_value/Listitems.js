@@ -5,6 +5,7 @@ export default function Listitems(props) {
     <div>
         
       <ul>
+        {/* {props.lists} */}
         {props.lists.map((item, index) => (
            <li key={index}>{item}</li>
          ))}
