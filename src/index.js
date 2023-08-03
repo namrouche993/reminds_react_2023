@@ -11,9 +11,9 @@ import App_main from './App_main';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
+  // <React.StrictMode>
       <Provider store={store}>
             <App_main />
       </Provider>
-  </React.StrictMode>
+  // </React.StrictMode>
 );

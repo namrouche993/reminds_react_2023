@@ -38,6 +38,15 @@ function Navbar() {
               <Link className="nav-link" to="/props5">App5 test-</Link>
             </li>
 
+            <li className="nav-item">
+              <Link className="nav-link" to="/app6">App6-</Link>
+            </li>
+
+            <li className="nav-item">
+              <Link className="nav-link" to="/app7">App7-</Link>
+            </li>
+
+
 
           </ul>
 
