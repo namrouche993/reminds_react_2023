@@ -1,5 +1,5 @@
 import React, { useRef, useState,useEffect } from 'react'
-let variable = 0;
+let variable = 0; // a eviter
 export default function App7_concrete_example() {
   const [sta,setSta] = useState(0);
   const refin = useRef(0);
