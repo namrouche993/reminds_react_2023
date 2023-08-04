@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { memo } from 'react'
 
-export default function Listitems(props) {
+function Listitems(props) {
+  console.log('list items component')
   return (
     <div>
         
@@ -14,3 +15,4 @@ export default function Listitems(props) {
     </div>
   )
 }
+export default memo(Listitems)

@@ -12,8 +12,8 @@ import App4 from './App4_using_redux_instead_of_props/App4';
 import App5 from './App5testprops/App5'
 import App6 from './App6_useeffect/App6';
 import App7 from './App7_useref/App7';
-import App8 from './App8_useMemo/App8';
-
+import App8 from './App8_useMemo_and_memo/App8';
+import App9 from './App9_useCallback/App9';
 export default function App_main() {
     
   return (
@@ -29,6 +29,7 @@ export default function App_main() {
            <Route path="/app6" element={<App6/>}>        </Route>
            <Route path="/app7" element={<App7/>}>        </Route>
            <Route path="/app8" element={<App8/>}>        </Route>
+           <Route path="/app9" element={<App9/>}>        </Route>
 
         </Routes>
       </div>
