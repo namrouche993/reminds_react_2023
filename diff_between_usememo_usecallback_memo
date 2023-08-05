@@ -1,0 +1,46 @@
+React.memo is to prevent child component to re-render until its values reacts
+so if your parent component has 2 inputs : 
+    <input onchange=( (e)=>{setNb1(e.target.value)}) />
+    <input onchange=( (e)=>{setNb2(e.target.value)}) />
+ and has 2 childs to display the inputs inside of their components :
+   <Child1 val={nb1}/>
+   <Child2 val={nb2}/>
+   <Child3> (the child3 is indepedant from input1 and input2 - for example it contains console.log('we are in child3'))
+
+so to prevent the situation when changing in input1, we get Child2 re-renders and Child3 re-renders even they are independants of input1 , so here we put in Child2 and Child3 export default React.memo(Child2) React.memo(Child3)
+so React.memo we use for example when sending props values from parent to childs.
+
+-----------------------------------
+-----------------------------------
+
+useCallback is used for functions, for sending functions from parent to child [[ or for me as i believe sending from child to parent ]], so we set usecallback in the parent fct that we want to put in <Child fct_in_child =  fct_wewrap_withusecallback_in_parent}>
+so in parent component we set : 
+
+#parent component : 
+    const fct_wewrap_withusecallback_in_parent = useCallback(() => {
+        setCounter(counter+1)
+    },counter)
+    return (
+        <Child10 sendbttnclick={fct_wewrap_withusecallback_in_parent}/>
+        value : {counter}
+    )
+
+#child component : 
+function Child(props) {
+    console.log('child10_callback')
+
+    useEffect(() => {
+      console.log('we are inside useeffect of child10_usecallback')
+    })
+    
+  return (
+    <>
+    Child10_callback
+    <br></br>
+    <button onClick={props.sendbttnclick}>child10_callback bttn</button>
+    </>
+  )
+}
+export default React.memo(Child10_callback) // dont forget to wrap it with React.memo
+
+

@@ -14,6 +14,8 @@ import App6 from './App6_useeffect/App6';
 import App7 from './App7_useref/App7';
 import App8 from './App8_useMemo_and_memo/App8';
 import App9 from './App9_useCallback/App9';
+import App10 from './App10_memorizedhook/App10';
+
 export default function App_main() {
     
   return (
@@ -30,6 +32,7 @@ export default function App_main() {
            <Route path="/app7" element={<App7/>}>        </Route>
            <Route path="/app8" element={<App8/>}>        </Route>
            <Route path="/app9" element={<App9/>}>        </Route>
+           <Route path="/app10" element={<App10/>}>        </Route>
 
         </Routes>
       </div>

@@ -22,6 +22,7 @@ function Child8(props) {
     <br></br>
     <input type='text' onChange={onchangefct} />
     <button onClick={onclickbttn}> send to parent</button>
+    text0 from child8 is : {text0}
     </>
   )
 }

@@ -3,7 +3,7 @@ import App_alternative_useeffect from './App_alternative_useeffect';
 import Child8 from './Child8';
 
 export default function App8() {
-  console.log('App8 component')
+    console.log('App8 component')
     const [number1,setNumber1]=useState(0);
     const [number2,setNumber2]=useState(0);
     const [number20,setNumber20]=useState(0);
@@ -13,20 +13,24 @@ export default function App8() {
         setNumber1(number1+1)
     }
     
-    const getNumbers2 = useCallback((input) => {
-      setNumber20(input)
-      },[number20])
     
     const onclicknb2 = () =>{
       console.log('onclicknb2 : ')
       setNumber2(number2+1)
   }
 
+     const getNumbers2 = useCallback((input) => {
+        setNumber20(input)
+      },[number20])
+    
+    // const getNumbers2 = (input) => {
+    //   setNumber20(input)
+    // }
+
     const randomfct = () => {
         console.log('randomfct bef')
         return Math.random()
     }
-
 
     //const valfct = randomfct();
     const valfct = useMemo(() => randomfct(), [number1])

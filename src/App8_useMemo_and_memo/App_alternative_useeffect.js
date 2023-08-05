@@ -28,6 +28,11 @@ function App_alternative_useeffect() {
             setVal0(randomfct())
         
         }, [number1])
+
+        // useEffect(() => {
+        //   console.log('useeffect in appalternativeuseffect')
+        // })
+        
         
 
         //const valfct = useMemo(() => randomfct(), [number1])
@@ -45,4 +50,5 @@ function App_alternative_useeffect() {
         </>
       )
     }
+    
 export default memo(App_alternative_useeffect)
