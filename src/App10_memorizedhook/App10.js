@@ -1,6 +1,7 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useMemo, useState } from 'react'
 import Child10 from './Child10'
 import Child10_callback from './Child10_callback'
+import {App10_fct} from './App10_fct.js';
 
 function App10() {
     const [nbparent10,setNbparent10] = useState(0);
@@ -20,7 +21,10 @@ function App10() {
         setGetbttn10callback(getbttn10callback==='red' ? 'blue' : 'red')
     },[getbttn10callback])
 
-  return (
+    const totalfct = useMemo(() => App10_fct(1000000,nbparent10_2), [nbparent10_2])
+    //const totalfct = App10_fct(1000000)
+  
+    return (
     <>
     App10 : 
     <br></br>
@@ -39,6 +43,11 @@ function App10() {
     <Child10_callback sendbttnclick={fctbttnclickfromchild10callback}/>
     <br></br>
      color of get bttn click from child10usecallback is : {getbttn10callback}
+     <br></br>
+     <br></br>
+     <br></br>
+     <br></br>
+     total fct  - the expensive function  - returns : {totalfct}
     </>
   )
 }

@@ -1,3 +1,7 @@
+
+# 1 - React.memo  : 
+
+
 React.memo is to prevent child component to re-render until its values reacts
 so if your parent component has 2 inputs : 
     <input onchange=( (e)=>{setNb1(e.target.value)}) />
@@ -10,10 +14,14 @@ so if your parent component has 2 inputs :
 so to prevent the situation when changing in input1, we get Child2 re-renders and Child3 re-renders even they are independants of input1 , so here we put in Child2 and Child3 export default React.memo(Child2) React.memo(Child3)
 so React.memo we use for example when sending props values from parent to childs.
 
+
 -----------------------------------
 -----------------------------------
 
-useCallback is used for functions, for sending functions from parent to child [[ or for me as i believe sending from child to parent ]], so we set usecallback in the parent fct that we want to put in <Child fct_in_child =  fct_wewrap_withusecallback_in_parent}>
+# 2 - useCallback  : 
+
+
+useCallback is used for functions, for sending functions from parent to child [[ or for me as i believe sending value from child to parent ]], so we set usecallback in the parent fct that we want to put in <Child fct_in_child =  fct_wewrap_withusecallback_in_parent}>
 so in parent component we set : 
 
 #parent component : 
@@ -44,3 +52,52 @@ function Child(props) {
 export default React.memo(Child10_callback) // dont forget to wrap it with React.memo
 
 
+
+-----------------------------------
+-----------------------------------
+
+# 3 - useMemo  : 
+
+useMemo is used when you want to execute a function just when the desired value will be trigged or changed, so we put the desired value in the dependancy part,
+useEffect can do the same job  with adding dependancy : - useEffect( () => {...},[dependancy]) - , but in net i heard that with functins and expensive computation it's better to use useMemo than useEffect , and useEffect is more using with API and call fetch 
+
+useMemo's example : 
+
+const App = () => {
+  const [counter, setCounter] = useState(0);
+  const [independentState, setIndependentState] = useState(0);
+
+  const squareValue = useMemo(() => {
+    console.log('Calculating square... or expensive computation');
+    return counter * counter;
+  }, [counter]);
+
+  return (
+    <div>
+      <p>Counter: {counter}</p>
+      <p>Square of Counter: {squareValue}</p>
+      <button onClick={() => setCounter(counter + 1)}>Increment Counter</button>
+      <button onClick={() => setIndependentState(independentState + 1)}>Change Independent State</button>
+    </div>
+  );
+};
+
+
+
+
+-----------------------------------
+-----------------------------------
+
+# 4 - useRef  : 
+main job of useRef is to accessing DOM element to change its style or something else.
+but also there is another job of useRef is to persist values between renders without causing a re-render when updated.
+so we can use it for previous values, and avoiding re-renders until re-rendering with other process
+It can be used to store a mutable value that does not cause a re-render when updated.
+
+Look at the 3 examples in App7
+
+
+# 5 - Redux : 
+dont forget to wrap <App/> main component in index.js with Provider store
+than adding store.js to store all values or something else
+and than going to the component when you want to make changes to the desired value and call it by useSelector and than dispacch it by useDispatch to change it

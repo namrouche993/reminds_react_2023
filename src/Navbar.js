@@ -53,11 +53,27 @@ function Navbar() {
             <li className="nav-item">
               <Link className="nav-link" to="/app9">App9-</Link>
             </li>
-
             
             <li className="nav-item">
               <Link className="nav-link" to="/app10">App10</Link>
             </li>
+
+            <li className="nav-item">
+              <Link className="nav-link" to="/app11">App11</Link>
+            </li>
+
+            <li className="nav-item">
+              <Link className="nav-link" to="/hottable">Hottable</Link>
+            </li>
+
+            <li className="nav-item">
+              <Link className="nav-link" to="/app12">App12</Link>
+            </li>
+
+            <li className="nav-item">
+              <Link className="nav-link" to="/app13">App Backend</Link>
+            </li>
+
 
 
 
