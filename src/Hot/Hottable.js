@@ -1,118 +1,57 @@
-import React, { useState } from 'react'
-import 'handsontable/dist/handsontable.full.css'; // Import Handsontable CSS
+import React, { useRef, useEffect } from 'react';
 import Handsontable from 'handsontable';
-import { beforeKeyDownfct } from './beforeKeyDownfct';
-import { afterChangeHandler } from './afterChangeHandler';
-import Changeval from './Changeval';
-import { useSelector, useDispatch } from 'react-redux'; 
-import { customRenderer } from './customRenderer';
-import { getInputValue_condition_split2,setInputValue_condition_split2 } from './Values';
-function Hottable() {
+import 'handsontable/dist/handsontable.full.css';
 
-  const value1  = useSelector(state => state.value1);
-  console.log('value1 from store in hottable ')
-  console.log(value1)
-  const dispatch = useDispatch();
+const Hottable = () => {
+  const hotContainer = useRef(null);
+  const persistentState = new Handsontable.plugins.PersistentState();
 
-  
-  // Custom rendering function
-
-  
-  const data = [
-   ['John', 30, 'Developer', '',60,40,20],
-   ['Ahmed', 13, 'Job', '',60,10,20],
-   ['Reda', 83, 'Driver', '',60,50,20],
-   ['Ahmed2', 75, 'Job', '',60,10,20],
-  //  ['John244444', 4443, 'Hamid444', 'Developer',90,40,20],
-  //  ['Ahmed3', 26, 'Job', 'Mechanical',60,10,20],
-  //  ['John4', 50, 'Developer', 'Developer',60,40,20],
-  //  ['John4', 50, 'Developer', 'Developer',60,40,20],
-  //  ['John4', 50, 'Developer', 'Developer',60,40,20],
-  //  ['John4', 50, 'Developer', 'Developer',60,40,20],
-  //  ['John4', 50, 'Developer', 'Developer',60,40,20],
-  //  ['John4', 50, 'Developer', 'Developer',60,40,20],
-
- ];
-
- var data02 = data.map(arr => [...arr]);
- console.log(data02)
- 
-
-
-  const hotTableComponent = React.useRef(null);
-  // const [hotInstance, setHotInstance] = useState(null);  WITHOUT REDUX
-  
-  React.useEffect(() => {
-
-    const hot  = new Handsontable(hotTableComponent.current, {
-      data,
-      columns: [
-        {}, // Column for 'Name'
-        {}, // Column for 'Age'
-        {
-          renderer: (instance, td, row, col, prop, value, cellProperties) => {
-            if(value==null){
-              td.innerHTML=''
-            } else {
-              td.innerHTML = value.toUpperCase();
-              //data02[row][col]=td.innerHTML
-            }  
-          },
-        },
-        {},
-        {},
-        {},
-        {}
-        // ... other columns
-      ],
-                    
+  useEffect(() => {
+    const hot = new Handsontable(hotContainer.current, {
+      data: [[1, 2, 3], [4, 5, 6], [7, 8, 9]],
+      colHeaders: true,
+      rowHeaders: true,
+      persistentState: true, // Enable persistent state
+      plugins: [persistentState],
     });
 
-        // Function to unmerge cells
- 
-      hot.addHook('afterChange', (changes, source) => {
-        console.log('afterchange : ')
-        console.log(changes)
-        console.log(source)
-      });
-    
-      //setHotInstance(hot);  WITHOUT REDUX
-      dispatch({ type: 'SET_HOT', payload: hot });  // WITH REDUX
+    // Check if persistent state is enabled and enable the plugin
+    const isPersistentStateEnabled = persistentState.isEnabled();
+    if (isPersistentStateEnabled) {
+      persistentState.enablePlugin();
+    }
 
     return () => {
-      console.log('unmount handsontable ')
       hot.destroy();
     };
-  }, []);
+  }, [persistentState]);
 
-  
-  const [input1text1,setInputtext1] = useState('')
+  const handleSaveToLocalStorage = () => {
+    const saveKey = 'exampleKey';
+    persistentState.saveValue(saveKey, hotContainer.current.hotInstance.getData());
+  };
 
-  const onchangeinputfct1 = (e) => {
-    setInputtext1(e.target.value);
-    setInputValue_condition_split2(e.target.value)
-  }
+  const handleLoadFromLocalStorage = () => {
+    const loadKey = 'exampleKey';
+    const savedData = persistentState.loadValue(loadKey);
+    if (savedData) {
+      hotContainer.current.hotInstance.loadData(savedData);
+    }
+  };
+
+  const handleResetLocalStorage = () => {
+    const resetKey = 'exampleKey';
+    persistentState.resetValue(resetKey);
+  };
 
   return (
-    <>
-    Hottable : 
-    <br></br>
-    <input type='text' onChange={onchangeinputfct1}/> - - {input1text1}
-    <br></br>
-    getinput condition_split2 is {getInputValue_condition_split2()}
-    <br></br>
-    <br></br>
-    <br></br>
-    <br></br>
-    <br></br>
-    {/* <Changeval hota={hotInstance}/>  WHITOUT REDUX */} 
-    <Changeval/>  {/* WITH REDUX : */}
-
     <div>
-      <div ref={hotTableComponent} />
+      <button onClick={handleSaveToLocalStorage}>Save to Local Storage</button>
+      <button onClick={handleLoadFromLocalStorage}>Load from Local Storage</button>
+      <button onClick={handleResetLocalStorage}>Reset Local Storage</button>
+      <div ref={hotContainer}></div>
     </div>
-    </>
   );
-}
+};
 
-export default Hottable
+export default Hottable;

@@ -19,7 +19,7 @@ import App11 from './App11_compare_redux_wth_3hooks/App11';
 import Hottable from './Hot/Hottable';
 import App12 from './App12/App12';
 import App13 from './App13_backend/App13';
-
+import App14 from './App14/App14';
 
 export default function App_main() {
     
@@ -42,6 +42,7 @@ export default function App_main() {
            <Route path="/hottable" element={<Hottable/>}>        </Route>
            <Route path="/app12" element={<App12/>}>        </Route>
            <Route path="/app13" element={<App13/>}>        </Route>
+           <Route path="/app14" element={<App14/>}>        </Route>
 
            
 
